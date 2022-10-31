@@ -12,17 +12,6 @@ React adalah library JavaScript yang deklaratif, efisien, dan fleksibel untuk me
 - Tunggu proses loading sampai git bash menampilkan “Happy hacking!”
 - Buka folder aplikasi di visual studio code
 
-### Struktur Folder React JS
-- Terdapat tiga folder dalam folder aplikasi react (node_module, public, src)
-- Folder node_modules merupakan packages-packages yang digunakan untuk project react. Tetapi folder ini diabaikan saja
-- Folder public berisi struktur web utama, seperti satu file .html, logo, dan lainnya
-- Didalam file .html terdapat `div id=”root”` yang nantinya disisipkan halaman home, about, contact, dan lainnya. Pada file inilah metode SPA
-- Folder public juga diabaikan
-- Folder src akan dikotak-katik. Folder ini memiliki file utama yaitu index.js
-- Didalam index.js akan mengimport react dan membuat sebuah virtual DOM, dimana nantinya akan mengambil element id=”root” `getElementById(‘root’)` pada file .html di folder public
-- Setelah itu root akan merender atau menampilkan function dengan return value html
-- Untuk menjalankan folder react buka terminal (bash), ketikkan `cd nama_aplikasi` dan `npm start`
-
 ## FITUR VIRTUAL DOM
 Virtual DOM (VDOM) adalah sebuah konsep dalam pemrograman di mana representasi ideal atau “virtual” dari antarmuka pengguna disimpan dalam memori dan disinkronkan dengan DOM “yang sebenarnya” oleh library seperti ReactDOM. Proses ini disebut reconciliation.
 - Cara kerja virtual DOM:
@@ -226,3 +215,85 @@ Event handler dengan argument harus ditulis dengan menggunakan arrow function ta
       );
     }
 ```
+# Day 4
+## Hooks 
+Hooks merupakan fitur baru di React 16.8. Dengan Hooks, kita dapat menggunakan state dan fitur React yang lain tanpa perlu menulis sebuah kelas baru. Hooks membuat Anda mampu untuk memecah satu komponen besar menjadi beberapa fungsi kecil yang berisi bagian-bagian yang saling berhubungan (seperti pemasangan langganan atau pengambilan data), daripada memaksa dengan memecah bagian per bagian di lifecycle method yang ada. Anda juga dapat melakukan pengelolaan local state komponen dengan reducer untuk membuatnya lebih mudah diprediksi.
+
+Menggunakan Hooks:
+Effect Hook memungkinkan Anda melakukan efek samping (side effects) didalam function component:
+```
+import React, { useState, useEffect } from 'react';
+
+function Example() {
+  const [count, setCount] = useState(0);
+
+  // Mirip dengan componentDidMount dan componentDidUpdate:
+  useEffect(() => {
+    // Memperbarui judul dokumen menggunakan API browser
+    document.title = `You clicked ${count} times`;
+  });
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
+```
+
+# Day 5
+
+## Form pada React 
+Elemen form HTML bekerja sedikit berbeda dari elemen DOM lainnya di React, karena elemen form secara natural menyimpan beberapa state internal. Sebagai contoh, form ini pada HTML biasa menerima nama tunggal:
+```
+<form>
+  <label>
+    Name:
+    <input type="text" name="name" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
+```
+Jika Anda menginginkan perilaku seperti ini di React, ini sebenarnya dapat bekerja. Namun di banyak kasus, akan lebih mudah untuk memiliki sebuah fungsi JavaScript yang menangani sebuah submisi dari sebuah form dan memiliki akses terhadap data yang dimasukkan pengguna ke dalam form. Cara standar untuk mencapai hal ini adalah dengan teknik yang disebut ”controlled component“.
+
+### Controlled Component
+Pada HTML, elemen form seperti <input>, <textarea>, dan <select> biasanya menyimpan state mereka sendiri dan memperbaruinya berdasarkan masukan dari pengguna. Di React, state yang dapat berubah seperti ini biasanya disimpan pada properti dari komponen, dan hanya akan diubah menggunakan setState().
+
+Kita dapat menggabungkan keduanya dengan menggunakan state pada React sebagai “sumber kebenaran satu-satunya”. Kemudian komponen React yang me-render sebuah form juga mengontrol apa yang terjadi dalam form tersebut pada masukan pengguna selanjutnya. Sebuah elemen masukan form yang nilainya dikontrol oleh React melalui cara seperti ini disebut sebagai ”controlled component“.
+  
+Contoh:
+  ```
+  class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+  ```
