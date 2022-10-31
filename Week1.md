@@ -260,13 +260,12 @@ Elemen form HTML bekerja sedikit berbeda dari elemen DOM lainnya di React, karen
 Jika Anda menginginkan perilaku seperti ini di React, ini sebenarnya dapat bekerja. Namun di banyak kasus, akan lebih mudah untuk memiliki sebuah fungsi JavaScript yang menangani sebuah submisi dari sebuah form dan memiliki akses terhadap data yang dimasukkan pengguna ke dalam form. Cara standar untuk mencapai hal ini adalah dengan teknik yang disebut ”controlled component“.
 
 ### Controlled Component
-Pada HTML, elemen form seperti <input>, <textarea>, dan <select> biasanya menyimpan state mereka sendiri dan memperbaruinya berdasarkan masukan dari pengguna. Di React, state yang dapat berubah seperti ini biasanya disimpan pada properti dari komponen, dan hanya akan diubah menggunakan setState().
+Pada HTML, elemen form seperti input, textarea, dan select biasanya menyimpan state mereka sendiri dan memperbaruinya berdasarkan masukan dari pengguna. Di React, state yang dapat berubah seperti ini biasanya disimpan pada properti dari komponen, dan hanya akan diubah menggunakan setState
 
 Kita dapat menggabungkan keduanya dengan menggunakan state pada React sebagai “sumber kebenaran satu-satunya”. Kemudian komponen React yang me-render sebuah form juga mengontrol apa yang terjadi dalam form tersebut pada masukan pengguna selanjutnya. Sebuah elemen masukan form yang nilainya dikontrol oleh React melalui cara seperti ini disebut sebagai ”controlled component“.
-  
 Contoh:
-  ```
-  class NameForm extends React.Component {
+```
+class NameForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -296,4 +295,5 @@ Contoh:
     );
   }
 }
-  ```
+```
+  
