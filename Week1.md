@@ -70,8 +70,8 @@ Cara paling sederhana untuk mendefinisikan sebuah komponen adalah dengan menulis
 }
 ```
 Fungsi ini adalah komponen React yang sah karena menerima sebuah “props” tunggal (yang bertindak sebagai props) atau argumen objek dengan data dan kembalian sebuah elemen React. Kita menyebut komponen karena itu benar-benar merupakan fungsi Javascript
-- Terdapat dua cara membuat component
-  - Gunakan class
+cara membuat component
+
   ```js
       import React, {Component} from 'react'
 
@@ -84,23 +84,6 @@ Fungsi ini adalah komponen React yang sah karena menerima sebuah “props” tun
       }
   ```
       
-  - Gunakan function (rekomendasi dari dokumentasi resmi react js)
-  ```js
-      const NamaComponent = () => {
-        return (
-          <div>
-            <h1>Ini contoh component</h1>
-          </div>
-        )
-      }
-
-      export default NamaComponent
-  ```
-- Cara membuat react js component
-  - Buat folder `components` di dalam folder src
-  - Sesuaikan nama file atau folder dengan component yang akan dibuat. Misal mau membuat member buat nama filenya `MemberInfo.jsx`
-  - Nama folder, file, dan function component harus menggunakan huruf kapital diawal dan di kata selanjutnya
-  - Panggil component pada halaman yang membutuhkan dengan import component pada file App.js
   
 ## PROPS DAN STATE
   ### Props
@@ -124,8 +107,8 @@ export default Parent;
   ```
 ### State
 State merupakan tipe data pada komponen React yang bersifat privat. Artinya, data dengan tipe state hanya dapat digunakan di dalam komponen itu sendiri. Komponen yang di dalamnya terdapat state disebut stateful component. Sebaliknya, komponen yang di dalamnya tidak menggunakan state disebut stateless component. State menyimpan nilai properti dari suatu komponen. Jika state berubah maka komponen akan dirender ulang. Berikut contoh state.
-- Cara menggunakan state:
-  ```
+Cara menggunakan state:
+```
   import React from 'react'
  
 class App extends React.Component {
@@ -143,24 +126,11 @@ class App extends React.Component {
 }
  
 export default App
-  ```
-  - Mengakses nilai state dengan curly brackets `{}`
-  ```js
-      import React, { useState } from 'react'; // import useState
+```
 
-      export default function App() {
-        const [state, setState] = useState('brachio');
-
-        return (
-          <div>
-            <h1>Hello Devsaurus</h1>
-            <p>My Name is {state}</p>
-          </div>
-        );
-      }
+Mengupdate data state dengan `setState()`
   ```
-  - Mengupdate data state dengan `setState()`
-  ```js
+  js
       import React, { useState } from 'react';
 
       export default function App() {
@@ -183,9 +153,6 @@ export default App
 ## REACT JS STYLING
 Terdapat beberapa cara melakukan styling pada component react js
 External CSS
-  - Cara ini sama seperti membuat external CSS biasa
-  - Buat file .css lalu import filenya ke component yang dibuat
-  - Styling yang ada pada file css akan di implementasikan pada component sesuai `className` yang dipanggil
   ```css
       .DottedBox {
         margin: 40px;
@@ -214,9 +181,7 @@ External CSS
 Day 3
 #  DAY 3
 ## REACT JS EVENTHANDLER
-- React dapat menghandle sebuah event yang memiliki perbedaan dengan handling event pada DOM element
-- React event menggunakan camelCase, bukan lowercase
-- Handler untuk event adalah sebuah function yang ditulis diantara curly braces `{}` dan tidak ditulis dalam bentuk string. Contoh
+React dapat menghandle sebuah event yang memiliki perbedaan dengan handling event pada DOM element. Handler untuk event adalah sebuah function yang ditulis diantara curly braces `{}` dan tidak ditulis dalam bentuk string. Contoh
 ```js
     import React, { useState } from 'react';
 
@@ -237,14 +202,10 @@ Day 3
       );
     }
 ```
-- Penjelasan:
-  - Event klik button pada react tidak ditulis onclick tapi **onClick**
-  - Event `handleChange` untuk menghandle event onClick
-  - Ketika button diklik maka function handleChange akan dieksekusi
+
 
 ### Event Handler dengan Argument
-- Event handler dengan argument harus ditulis dengan menggunakan arrow function
-- Jika ditulis tanpa arrow function maka event handler tidak dieksekusi sesuai dengan event yang terjadi dalam component
+Event handler dengan argument harus ditulis dengan menggunakan arrow function tanpa arrow function maka event handler tidak dieksekusi sesuai dengan event yang terjadi dalam component.
 ```js
     import React, { useState } from 'react';
 
