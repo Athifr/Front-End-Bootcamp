@@ -226,3 +226,53 @@ Menambahkan redux thunk
 ```
 npm install redux-thunk@2.3.0
 ```
+
+Terapkan middleware saat membuat penyimpanan aplikasi menggunakan applyMiddleware Redux. Dengan anggapan aplikasi React berisi redux dan react-redux, berkas index.js.
+contoh :
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import './index.css';
+import rootReducer from './reducers';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+// use applyMiddleware to add the thunk middleware to the store
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
+Menggunakan Thunk Redux di Aplikasi Sampel
+Kasus penggunaan paling umum untuk Redux Thunk adalah berkomunikasi secara asinkron dengan API eksternal untuk mengambil atau menyimpan data. Redux Thunk memudahkan pengiriman aksi yang mengikuti siklus hidup permintaan ke API eksternal.
+
+Membuat item agenda baru biasanya melibatkan pengiriman aksi terlebih dahulu untuk mengindikasikan bahwa pembuatan item agenda telah dimulai. Kemudian, jika item agenda berhasil dibuat dan dikembalikan oleh server eksternal, aksi lain akan dikirim bersama item agenda baru. Jika ada kesalahan dan agenda gagal disimpan di server, sebuah aksi bersama kesalahan dapat dikirim sebagai gantinya.
+
+Dalam komponen kontainer Anda, impor aksi dan kirimkan:
+```
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
+import NewTodo from '../components/NewTodo';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddTodo: todo => {
+      dispatch(addTodo(todo));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewTodo);
+```
