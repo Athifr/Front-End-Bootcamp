@@ -29,9 +29,8 @@ Penggunaan tipe data props pada code
       address: PropTypes.object,
     };
 ```
-
-- **Catatan**:
-    - `PropTypes.oneOfType([types])` memberikan pilihan tipe data pada sebuah objek
+**Catatan**:
+`PropTypes.oneOfType([types])` memberikan pilihan tipe data pada sebuah objek
 ```js
     Count.propTypes = {
       counts: PropTypes.array,
